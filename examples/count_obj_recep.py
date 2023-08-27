@@ -4,6 +4,7 @@
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
 
+import re
 import habitat
 
 if __name__ == "__main__":
@@ -20,7 +21,10 @@ if __name__ == "__main__":
         d[key] += 1
 
     def clean_obj_name(on):
-        return on.replace(".object_config.json", "").replace("_:0000", "")
+        return re.sub(r"^\d{3}_", "", on.replace(".object_config.json", "").   replace("_:0000", ""))
+    
+    def clean_recep_name(rn):
+        return re.sub(r"_:\d{4}$", "", rn)
     
     def _sync_dicts(d1, d2):
 
@@ -53,16 +57,16 @@ if __name__ == "__main__":
         for tname, _ in eps.targets.items():
             _update_count_dict(target_objects, clean_obj_name(tname))
         for tr in eps.target_receptacles:
-            _update_count_dict(target_receptacles, tr[0])
+            _update_count_dict(target_receptacles, clean_recep_name(tr[0]))
         for gr in eps.goal_receptacles:
-            _update_count_dict(goal_receptacles, gr[0])
+            _update_count_dict(goal_receptacles, clean_recep_name(gr[0]))
     
     import numpy as np
     import matplotlib.pyplot as plt
 
  
     ### objects
-    # rigid_objects, target_objects = _sync_dicts(rigid_objects, target_objects)
+    rigid_objects, target_objects = _sync_dicts(rigid_objects, target_objects)
 
     plt.figure(figsize=(9,7))
     plt.barh(list(rigid_objects.keys()), list(rigid_objects.values()), left=list(target_objects.values()), label="# occurrences")
