@@ -476,7 +476,12 @@ class RearrangeEpisodeGenerator:
         self.existing_rigid_objects = set(rom.get_object_handles())
 
         while len(generated_episodes) < num_episodes:
-            new_episode = self.generate_single_episode()
+            try:
+                new_episode = self.generate_single_episode()
+            except:
+                print("\n\n!!! episode generation failed !!!\n\n")
+                new_episode = None
+
             if new_episode is None:
                 failed_episodes += 1
                 continue
