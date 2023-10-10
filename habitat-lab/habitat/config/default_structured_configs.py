@@ -1279,8 +1279,8 @@ class HabitatSimV0Config(HabitatBaseConfig):
     # with concurrent rendering
     leave_context_with_background_renderer: bool = False
     enable_gfx_replay_save: bool = False
-    hbao_visual_effects: bool = False
-    pbr_image_based_lighting: bool = True
+    # hbao_visual_effects: bool = False
+    # pbr_image_based_lighting: bool = True
 
 
 @attr.s(auto_attribs=True, slots=True)
