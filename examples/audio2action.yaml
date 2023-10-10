@@ -34,10 +34,6 @@ receptacle_sets:
       - ""
     excluded_receptacle_substrings: []
 
-max_objects_per_receptacle:
-  - ["receptacle_aabb_Chr1_Top1_frl_apartment_chair_01", 2]
-  - ["receptacle_aabb_sink_kitchen_counter", 2]
-
 scene_sampler:
   type: "subset"
   params:
@@ -62,7 +58,7 @@ object_target_samplers:
     params:
       object_samplers: ["any_targets"]
       receptacle_sets: ["hab2"]
-      num_samples: [1, 1]
+      num_samples: [2, 2]
       orientation_sampling: "up"
 
 ao_state_samplers:

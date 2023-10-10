@@ -37,6 +37,6 @@ if __name__ == "__main__":
         for _ in range(n_episodes):
             dataset.episodes += ep_gen.generate_episodes(1, verbose)
 
-        with gzip.open("audio2action_ep_dataset.json.gz", "wt") as f:
+        with open("audio2action_multi_ep_dataset.json", "w") as f:
             f.write(dataset.to_json())
     pass

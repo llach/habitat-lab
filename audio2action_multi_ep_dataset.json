@@ -1,0 +1,113 @@
+{
+  "config": null,
+  "episodes": [
+    {
+      "episode_id": "0",
+      "scene_id": "/Users/llach/repos/home-robot/data/hssd-hab/scenes-uncluttered/102344457.scene_instance.json",
+      "scene_dataset_config": "/Users/llach/repos/home-robot/data/hssd-hab/hssd-hab-uncluttered.scene_dataset_config.json",
+      "additional_obj_config_paths": [],
+      "start_position": [0, 0, 0],
+      "start_rotation": [0, 0, 0, 1],
+      "info": {
+        "object_labels": {
+          "13ac0c45a1eb5c63d8749867369e91783827f820_:0000": "hab2|0",
+          "fa3b316d1bb3a0e38c138cd49431cdf665509239_:0000": "hab2|1"
+        }
+      },
+      "ao_states": {},
+      "rigid_objs": [
+        [
+          "13ac0c45a1eb5c63d8749867369e91783827f820.object_config.json",
+          [
+            [0.3551, 0.00172, 0.93483, 4.34226],
+            [-0.00006, 1.0, -0.00182, 0.73741],
+            [-0.93483, 0.0006, 0.35509, -21.23681],
+            [0.0, 0.0, 0.0, 1.0]
+          ]
+        ],
+        [
+          "fa3b316d1bb3a0e38c138cd49431cdf665509239.object_config.json",
+          [
+            [-0.99062, 0.05941, 0.12306, 10.6849],
+            [-0.00014, 0.90011, -0.43567, 0.82202],
+            [-0.13665, -0.4316, -0.89165, -13.83863],
+            [0.0, 0.0, 0.0, 1.0]
+          ]
+        ]
+      ],
+      "targets": {
+        "13ac0c45a1eb5c63d8749867369e91783827f820_:0000": [
+          [-0.69659, 0.0, -0.71747, 16.47123],
+          [0.0, 1.0, 0.0, 0.65219],
+          [0.71747, 0.0, -0.69659, -10.51011],
+          [0.0, 0.0, 0.0, 1.0]
+        ],
+        "fa3b316d1bb3a0e38c138cd49431cdf665509239_:0000": [
+          [-0.92881, 0.0, -0.37055, 15.00301],
+          [0.0, 1.0, 0.0, 1.08112],
+          [0.37055, 0.0, -0.92881, -8.87782],
+          [0.0, 0.0, 0.0, 1.0]
+        ]
+      },
+      "markers": [
+        {
+          "name": "cab_push_point_7",
+          "type": "articulated_object",
+          "params": {
+            "offset": [0.3, 0.0, 0],
+            "link": "drawer1_top",
+            "object": "kitchen_counter_:0000"
+          }
+        },
+        {
+          "name": "cab_push_point_6",
+          "type": "articulated_object",
+          "params": {
+            "offset": [0.3, 0.0, 0],
+            "link": "drawer2_top",
+            "object": "kitchen_counter_:0000"
+          }
+        },
+        {
+          "name": "cab_push_point_5",
+          "type": "articulated_object",
+          "params": {
+            "offset": [0.3, 0.0, 0],
+            "link": "drawer3",
+            "object": "kitchen_counter_:0000"
+          }
+        },
+        {
+          "name": "cab_push_point_4",
+          "type": "articulated_object",
+          "params": {
+            "offset": [0.3, 0.0, 0],
+            "link": "drawer4",
+            "object": "kitchen_counter_:0000"
+          }
+        },
+        {
+          "name": "fridge_push_point",
+          "type": "articulated_object",
+          "params": {
+            "offset": [0.1, -0.62, 0.2],
+            "link": "top_door",
+            "object": "fridge_:0000"
+          }
+        }
+      ],
+      "target_receptacles": [
+        ["c20a0e84afd93a3008f0df44bb00a7fc65913557_:0000", null],
+        ["fdc07a59b1ffb24d6de5646547d6fe08da8ae5a4_:0000", null]
+      ],
+      "goal_receptacles": [
+        ["1c3ca195a923c9a2a65f1f73b6d6e3256c768399_:0000", null],
+        ["a23c0acfc3cca5c709dccdf65564628e76ab4498_:0000", null]
+      ],
+      "name_to_receptacle": {
+        "13ac0c45a1eb5c63d8749867369e91783827f820_:0000": "c20a0e84afd93a3008f0df44bb00a7fc65913557_:0000|receptacle_mesh_c20a0e84afd93a3008f0df44bb00a7fc65913557.0000",
+        "fa3b316d1bb3a0e38c138cd49431cdf665509239_:0000": "fdc07a59b1ffb24d6de5646547d6fe08da8ae5a4_:0000|receptacle_mesh_fdc07a59b1ffb24d6de5646547d6fe08da8ae5a4.0000"
+      }
+    }
+  ]
+}
