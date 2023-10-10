@@ -221,6 +221,51 @@ def get_config_defaults() -> "DictConfig":
     """
     return OmegaConf.create(RearrangeEpisodeGeneratorConfig())  # type: ignore[call-overload]
 
+def print_metadata_mediator(ep_gen):
+    mm = ep_gen.sim.metadata_mediator
+    receptacles = get_all_scenedataset_receptacles(ep_gen.sim)
+    logger.info("==================================")
+    logger.info("Listing SceneDataset Summary")
+    logger.info("==================================")
+    logger.info(f" SceneDataset: {mm.active_dataset}\n")
+    logger.info("--------")
+    logger.info(" Scenes:")
+    logger.info("--------\n    ")
+    logger.info("\n     ".join(mm.get_scene_handles()))
+    logger.info("---------------")
+    logger.info(" Rigid Objects:")
+    logger.info("---------------\n    ")
+    logger.info(
+        "\n     ".join(mm.object_template_manager.get_template_handles()),
+    )
+    logger.info("---------------------")
+    logger.info(" Articulated Objects:")
+    logger.info("---------------------\n    ")
+    logger.info("\n     ".join(mm.urdf_paths))
+
+    logger.info("-------------------------")
+    logger.info("Stage Global Receptacles:")
+    logger.info("-------------------------")
+    for handle, r_list in receptacles["stage"].items():
+        logger.info(f"  - {handle}\n    ")
+        logger.info("\n     ".join(r_list))
+
+    logger.info("-------------------------")
+    logger.info("Rigid Object Receptacles:")
+    logger.info("-------------------------")
+    for handle, r_list in receptacles["rigid"].items():
+        logger.info(f"  - {handle}\n    ")
+        logger.info("\n     ".join(r_list))
+    logger.info("-------------------------------")
+    logger.info("Articulated Object receptacles:")
+    logger.info("-------------------------------")
+    for handle, r_list in receptacles["articulated"].items():
+        logger.info(f"  - {handle}\n    ")
+        logger.info("\n     ".join(r_list))
+
+    logger.info("==================================")
+    logger.info("Done listing SceneDataset summary")
+    logger.info("==================================")
 
 if __name__ == "__main__":
     import argparse
