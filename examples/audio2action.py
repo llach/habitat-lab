@@ -3,6 +3,7 @@
 # Copyright (c) Meta Platforms, Inc. and its affiliates.
 # This source code is licensed under the MIT license found in the
 # LICENSE file in the root directory of this source tree.
+import json
 import gzip 
 
 from omegaconf import OmegaConf
@@ -18,11 +19,11 @@ from habitat.datasets.rearrange.run_episode_generator import (
 
 if __name__ == "__main__":
     vis = False
-    verbose = True
+    verbose = False
     n_episodes = 1
+    output_name = "audio2action_multi_ep_dataset.json"
 
     cfg = get_config_defaults()
-    # override_config = OmegaConf.load("examples/rearrange.yaml")
     override_config = OmegaConf.load("examples/audio2action.yaml")
     cfg = OmegaConf.merge(cfg, override_config)
 
@@ -37,6 +38,10 @@ if __name__ == "__main__":
         for _ in range(n_episodes):
             dataset.episodes += ep_gen.generate_episodes(1, verbose)
 
-        with open("audio2action_multi_ep_dataset.json", "w") as f:
+        with open(output_name, "w") as f:
             f.write(dataset.to_json())
+        
+        with gzip.open(output_name+".gz", "wt") as f:
+                f.write(dataset.to_json())
+
     pass

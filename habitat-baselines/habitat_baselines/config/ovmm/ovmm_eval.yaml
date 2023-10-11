@@ -5,6 +5,12 @@ defaults:
   - /habitat_baselines: habitat_baselines_rl_config_base
   - _self_
 
+habitat:
+  dataset:
+    data_path: "data/datasets/audio2action/audio2action_multi_ep_dataset.json.gz"
+    transformations_matrix_path: null
+    viewpoints_matrix_path: null
+
 habitat_baselines:
   verbose: False
   torch_gpu_id: 0
