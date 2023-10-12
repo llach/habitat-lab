@@ -477,10 +477,11 @@ def add_cat_fields_to_episodes(
                 rec_category_mapping=rec_category_mapping,
             )
 
-            if start_rec_cat == goal_rec_cat:
-                print("Start and goal receptacle category are same")
-                print("Skipping episode", episode["episode_id"])
-                continue
+            # NOTE check disabled; why are goal and target recep not allowed to be of the same category?
+            # if start_rec_cat == goal_rec_cat:
+            #     print("Start and goal receptacle category are same")
+            #     print("Skipping episode", episode["episode_id"])
+            #     continue
 
             episode["object_category"] = obj_cat
             episode["start_recep_category"] = start_rec_cat
@@ -612,5 +613,7 @@ if __name__ == "__main__":
     print(f"Number of episodes modified: {len(episodes['episodes'])}")
     episodes_json = DatasetFloatJSONEncoder().encode(episodes)
     with gzip.open(source_data+"_ovmm.json.gz", "wt") as f:
+        f.write(episodes_json)
+    with open("audio2action_multi_ep_dataset_ovmm.json", "wt") as f:
         f.write(episodes_json)
     print("All episodes written")

@@ -61,55 +61,55 @@ object_target_samplers:
       num_samples: [2, 2]
       orientation_sampling: "up"
 
-ao_state_samplers:
-  -
-    name: "open_fridge_cab"
-    type: "composite"
-    params:
-      -
-        ao_handle: "fridge"
-        joint_states:
-          - ["top_door", 1.5, 1.5]
-        should_sample_all_joints: True
-      -
-        ao_handle: "counter"
-        joint_states:
-          - ["drawer1_top", 0.5, 0.5]
-          - ["drawer1_bottom", 0.5, 0.5]
-          - ["drawer2_top", 0.5, 0.5]
-          - ["drawer2_middle", 0.5, 0.5]
-          - ["drawer2_bottom", 0.5, 0.5]
-          - ["drawer3", 0.5, 0.5]
-          - ["drawer4", 0.5, 0.5]
+# ao_state_samplers:
+#   -
+#     name: "open_fridge_cab"
+#     type: "composite"
+#     params:
+#       -
+#         ao_handle: "fridge"
+#         joint_states:
+#           - ["top_door", 1.5, 1.5]
+#         should_sample_all_joints: True
+#       -
+#         ao_handle: "counter"
+#         joint_states:
+#           - ["drawer1_top", 0.5, 0.5]
+#           - ["drawer1_bottom", 0.5, 0.5]
+#           - ["drawer2_top", 0.5, 0.5]
+#           - ["drawer2_middle", 0.5, 0.5]
+#           - ["drawer2_bottom", 0.5, 0.5]
+#           - ["drawer3", 0.5, 0.5]
+#           - ["drawer4", 0.5, 0.5]
 
-markers:
-  - name: "cab_push_point_7"
-    type: "articulated_object"
-    params:
-      offset: [0.3,0.0,0]
-      link: "drawer1_top"
-      object: "kitchen_counter_:0000"
-  - name: "cab_push_point_6"
-    type: "articulated_object"
-    params:
-      offset: [0.3,0.0,0]
-      link: "drawer2_top"
-      object: "kitchen_counter_:0000"
-  - name: "cab_push_point_5"
-    type: "articulated_object"
-    params:
-      offset: [0.3,0.0,0]
-      link: "drawer3"
-      object: "kitchen_counter_:0000"
-  - name: "cab_push_point_4"
-    type: "articulated_object"
-    params:
-      offset: [0.3,0.0,0]
-      link: "drawer4"
-      object: "kitchen_counter_:0000"
-  - name: "fridge_push_point"
-    type: "articulated_object"
-    params:
-      offset: [0.10,-0.62,0.2]
-      link: "top_door"
-      object: "fridge_:0000"
+# markers:
+#   - name: "cab_push_point_7"
+#     type: "articulated_object"
+#     params:
+#       offset: [0.3,0.0,0]
+#       link: "drawer1_top"
+#       object: "kitchen_counter_:0000"
+#   - name: "cab_push_point_6"
+#     type: "articulated_object"
+#     params:
+#       offset: [0.3,0.0,0]
+#       link: "drawer2_top"
+#       object: "kitchen_counter_:0000"
+#   - name: "cab_push_point_5"
+#     type: "articulated_object"
+#     params:
+#       offset: [0.3,0.0,0]
+#       link: "drawer3"
+#       object: "kitchen_counter_:0000"
+#   - name: "cab_push_point_4"
+#     type: "articulated_object"
+#     params:
+#       offset: [0.3,0.0,0]
+#       link: "drawer4"
+#       object: "kitchen_counter_:0000"
+#   - name: "fridge_push_point"
+#     type: "articulated_object"
+#     params:
+#       offset: [0.10,-0.62,0.2]
+#       link: "top_door"
+#       object: "fridge_:0000"
