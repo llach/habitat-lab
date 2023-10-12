@@ -25,6 +25,7 @@ from habitat.datasets.rearrange.viewpoints import (
 )
 from habitat_sim.agent.agent import ActionSpec
 from habitat_sim.agent.controls import ActuationSpec
+from habitat.datasets.rearrange.run_episode_generator import get_config_defaults
 
 
 def get_rec_category(rec_id, rec_category_mapping=None):
@@ -535,62 +536,35 @@ def add_cat_fields_to_episodes(
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-        "--source_data_dir",
-        type=str,
-        default="data/datasets/replica_cad/rearrange/v1/",
-    )
-    parser.add_argument(
-        "--source_episodes_tag", type=str, default="rearrange_easy"
-    )
-    parser.add_argument(
-        "--target_data_dir",
-        type=str,
-        default="data/datasets/replica_cad/rearrange/v1/",
-    )
-    parser.add_argument(
-        "--target_episodes_tag", type=str, default="categorical_rearrange_easy"
-    )
-    parser.add_argument(
-        "--config",
-        type=str,
-        required=True,
-        help="Config file used for first stage of episode generation. Agent's camera parameters are read from here",
-    )
+
     parser.add_argument(
         "--rec_cache_dir",
         type=str,
         default="data/cache/receptacle_viewpoints",
         help="Path to cache where receptacle viewpoints were saved during first stage of episode generation",
     )
-    parser.add_argument("--obj_category_mapping_file", type=str, default=None)
-    parser.add_argument("--rec_category_mapping_file", type=str, default=None)
-    parser.add_argument(
-        "--num_episodes", type=int, default=-1
-    )  # -1 uses all episodes
-    parser.add_argument("--add_viewpoints", action="store_true")
-    parser.add_argument("--debug_viz", action="store_true")
 
     args = parser.parse_args()
 
-    source_data_dir = args.source_data_dir
-    source_episodes_tag = args.source_episodes_tag
-    target_data_dir = args.target_data_dir
-    target_episodes_tag = args.target_episodes_tag
+    source_data = "/Users/llach/repos/home-robot/data/datasets/audio2action/audio2action_multi_ep_dataset"
+    obj_category_mapping_file = "/Users/llach/repos/home-robot/data/hssd-hab/object_categories.csv"
+    rec_category_mapping_file = "/Users/llach/repos/home-robot/data/hssd-hab/hssd-receptacles.csv"
+    add_viewpoints = True
     rec_cache_dir = args.rec_cache_dir
-    num_episodes = args.num_episodes
-    config = OmegaConf.load(args.config)
+    num_episodes = -1
+    debug_viz = False
+    config = get_config_defaults()
 
     obj_category_mapping = None
-    if args.obj_category_mapping_file is not None:
+    if obj_category_mapping_file is not None:
         obj_category_mapping = read_obj_category_mapping(
-            args.obj_category_mapping_file
+            obj_category_mapping_file
         )
 
     rec_category_mapping = None
-    if args.rec_category_mapping_file is not None:
+    if rec_category_mapping_file is not None:
         rec_category_mapping = read_obj_category_mapping(
-            args.rec_category_mapping_file, keep_only_recs=True
+            rec_category_mapping_file, keep_only_recs=False
         )
 
     obj_to_id, rec_to_id = get_cats_list(
@@ -600,32 +574,23 @@ if __name__ == "__main__":
     print(f"Number of object categories: {len(obj_to_id)}")
     print(f"Number of receptacle categories: {len(rec_to_id)}")
     print(obj_to_id, rec_to_id)
-    # Add category fields and save episodes
-    for split in os.listdir(source_data_dir):
-        episodes_file = osp.join(
-            source_data_dir, split, f"{source_episodes_tag}.json.gz"
-        )
-        if not osp.exists(episodes_file):
-            continue
-        episodes = add_cat_fields_to_episodes(
-            episodes_file,
-            obj_to_id,
-            rec_to_id,
-            rec_cache_dir,
-            num_episodes,
-            config,
-            obj_category_mapping=obj_category_mapping,
-            rec_category_mapping=rec_category_mapping,
-            enable_add_viewpoints=args.add_viewpoints,
-            debug_viz=args.debug_viz,
-        )
 
-        print(f"Number of episodes in {split}: {len(episodes['episodes'])}")
-        episodes_json = DatasetFloatJSONEncoder().encode(episodes)
-        os.makedirs(osp.join(target_data_dir, split), exist_ok=True)
-        target_episodes_file = osp.join(
-            target_data_dir, split, f"{target_episodes_tag}.json.gz"
-        )
-        with gzip.open(target_episodes_file, "wt") as f:
-            f.write(episodes_json)
+    # Add category fields and save episodes
+    episodes = add_cat_fields_to_episodes(
+        source_data+".json.gz",
+        obj_to_id,
+        rec_to_id,
+        rec_cache_dir,
+        num_episodes,
+        config,
+        obj_category_mapping=obj_category_mapping,
+        rec_category_mapping=rec_category_mapping,
+        enable_add_viewpoints=add_viewpoints,
+        debug_viz=debug_viz,
+    )
+
+    print(f"Number of episodes modified: {len(episodes['episodes'])}")
+    episodes_json = DatasetFloatJSONEncoder().encode(episodes)
+    with gzip.open(source_data+"_ovmm.json.gz", "wt") as f:
+        f.write(episodes_json)
     print("All episodes written")
