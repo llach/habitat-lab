@@ -261,6 +261,8 @@ habitat:
       "/Users/llach/repos/home-robot/data/hssd-hab/objects/decomposed/62fd5aea80235288d1896ddab73cdcef97a6a585",
       "/Users/llach/repos/home-robot/data/hssd-hab/objects/decomposed/8597e0af462124aef9ec06dde13f45bb2b223a74",
     ]
+  task:
+    receptacle_categories_file: "/Users/llach/repos/home-robot/data/hssd-hab/hssd-receptacles.csv"
 
 habitat_baselines:
   verbose: False
