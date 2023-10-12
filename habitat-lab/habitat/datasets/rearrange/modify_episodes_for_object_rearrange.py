@@ -3,6 +3,7 @@ import gzip
 import json
 import os
 import os.path as osp
+from os.path import join, isdir
 import pickle
 import re
 from typing import Any, Dict, List, Set
@@ -535,22 +536,12 @@ def add_cat_fields_to_episodes(
 
 
 if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument(
-        "--rec_cache_dir",
-        type=str,
-        default="data/cache/receptacle_viewpoints",
-        help="Path to cache where receptacle viewpoints were saved during first stage of episode generation",
-    )
-
-    args = parser.parse_args()
 
     source_data = "/Users/llach/repos/home-robot/data/datasets/audio2action/audio2action_multi_ep_dataset"
-    obj_category_mapping_file = "/Users/llach/repos/home-robot/data/hssd-hab/object_categories.csv"
+    obj_category_mapping_file = "/Users/llach/repos/home-robot/data/hssd-hab/objects.csv"
     rec_category_mapping_file = "/Users/llach/repos/home-robot/data/hssd-hab/hssd-receptacles.csv"
-    add_viewpoints = True
-    rec_cache_dir = args.rec_cache_dir
+    enable_add_viewpoints = True
+    rec_cache_dir = "/Users/llach/repos/habitat-lab/data/cache/receptacle_viewpoints"
     num_episodes = -1
     debug_viz = False
     config = get_config_defaults()
@@ -566,6 +557,35 @@ if __name__ == "__main__":
         rec_category_mapping = read_obj_category_mapping(
             rec_category_mapping_file, keep_only_recs=False
         )
+
+    # create mapping for decomposed objects
+    data_path = "/Users/llach/repos/home-robot/data"
+    objects_path = join(data_path, "hssd-hab/objects/")
+    objects_decomposed_path = os.path.join(objects_path, "decomposed")
+
+    lex = {c["id"]: c["name"] for c in json.load(open(join(data_path, "hssd-hab/ssd/hssd-hab_semantic_lexicon.json"), "r"))["classes"]
+    }
+    dec_objects = {}
+    for dec in os.listdir(objects_decomposed_path):
+        decdir = join(objects_decomposed_path, dec)
+        if not isdir(decdir): continue
+
+        for decf in os.listdir(decdir):
+            if ".object_config.json" not in decf: continue
+            
+            obj_name = decf.split(".object_config.json")[0]
+            obj_conf = json.load(open(join(decdir, decf)))
+            obj_cat  = lex[obj_conf["semantic_id"]] if "semantic_id" in obj_conf else ""
+
+            dec_objects = {
+                **dec_objects,
+                obj_name: obj_cat
+            }
+
+    obj_category_mapping = {
+        **obj_category_mapping,
+        **dec_objects
+    }
 
     obj_to_id, rec_to_id = get_cats_list(
         obj_category_mapping=obj_category_mapping,
@@ -585,7 +605,7 @@ if __name__ == "__main__":
         config,
         obj_category_mapping=obj_category_mapping,
         rec_category_mapping=rec_category_mapping,
-        enable_add_viewpoints=add_viewpoints,
+        enable_add_viewpoints=enable_add_viewpoints,
         debug_viz=debug_viz,
     )
 
