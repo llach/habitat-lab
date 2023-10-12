@@ -112,7 +112,7 @@ class ShortestPathFollower:
                 curr_pos = self._sim.robot.base_pos
 
             # Get the target rotation
-            next_action = self._follower.next_action_along(goal_pos, curr_rot=curr_rot, curr_pos=curr_pos)
+            next_action = self._follower.next_action_along(goal_pos)#, curr_rot=curr_rot, curr_pos=curr_pos)
         except habitat_sim.errors.GreedyFollowerError as e:
             if self._stop_on_error:
                 next_action = HabitatSimActions.stop
