@@ -382,7 +382,7 @@ if __name__ == "__main__":
             # serialize the dataset
             import gzip
 
-            with gzip.open(output_path, "wt") as f:
+            with open(output_path, "wt") as f:
                 f.write(dataset.to_json())
 
             logger.info(
