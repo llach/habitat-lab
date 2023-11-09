@@ -47,7 +47,7 @@ object_samplers:
     params:
       object_sets: ["hab2"]
       receptacle_sets: ["hab2"]
-      num_samples: [5, 5]
+      num_samples: [10, 10]
       orientation_sampling: "up"
 
 object_target_samplers:

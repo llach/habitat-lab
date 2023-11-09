@@ -98,7 +98,7 @@ object_target_samplers:
     params:
       object_samplers: ["any_targets"]
       receptacle_sets: ["hab2"]
-      num_samples: [1, 1]
+      num_samples: [2, 2]
       orientation_sampling: "up"
 
 ao_state_samplers:
