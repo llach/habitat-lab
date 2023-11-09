@@ -261,6 +261,7 @@ def snap_down(
 
     if bb_ray_prescreen_results["surface_snap_point"] is None:
         # no support under this object, return failure
+        print("no support under object")
         return False
 
     # finish up
@@ -283,13 +284,14 @@ def snap_down(
                 )
             ):
                 obj.translation = cached_position
-                # print(f" Failure: contact in final position w/ distance = {cp.contact_distance}.")
-                # print(f" Failure: contact in final position with non support object {cp.object_id_a} or {cp.object_id_b}.")
+                print(f" Failure: contact in final position w/ distance = {cp.contact_distance}.")
+                print(f" Failure: contact in final position with non support object {cp.object_id_a} or {cp.object_id_b}.")
                 return False
         return True
     else:
         # no valid position found, reset and return failure
         obj.translation = cached_position
+        print("no valid position found!")
         return False
 
 
