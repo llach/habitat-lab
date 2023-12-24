@@ -330,6 +330,9 @@ class ObjectSampler:
                     if not self._is_accessible(sim, new_object):
                         continue
                     return new_object
+                elif vdb is not None:
+                    vdb.peek_rigid_object(new_object, show=True)
+                    pass
 
             elif not new_object.contact_test():
                 logger.info(

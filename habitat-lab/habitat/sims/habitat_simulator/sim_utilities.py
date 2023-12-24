@@ -270,6 +270,7 @@ def snap_down(
         obj.translation = bb_ray_prescreen_results["surface_snap_point"]
         if vdb is not None:
             vdb.get_observation(obj.translation)
+
         sim.perform_discrete_collision_detection()
         cps = sim.get_physics_contact_points()
         for cp in cps:

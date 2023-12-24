@@ -20,7 +20,7 @@ from habitat.datasets.rearrange.run_episode_generator import (
 )
 
 if __name__ == "__main__":
-    vis = False
+    vis = True
     verbose = False
     n_episodes = 1
 
@@ -39,7 +39,7 @@ if __name__ == "__main__":
 
     cfg = get_config_defaults()
     # override_config = OmegaConf.load("examples/rearrange.yaml")
-    override_config = OmegaConf.load("examples/audio2action.yaml")
+    override_config = OmegaConf.load("/Users/llach/repos/habitat-lab/examples/audio2action.yaml")
     cfg = OmegaConf.merge(cfg, override_config)
 
     dataset = RearrangeDatasetV0()
