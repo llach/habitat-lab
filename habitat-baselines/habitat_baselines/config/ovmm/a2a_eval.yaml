@@ -7,11 +7,9 @@ defaults:
 
 habitat:
   dataset:
-    data_path: "/Users/llach/repos/home-robot/data/datasets/audio2action/audio2action_multi_ep_dataset_ovmm_patched.json.gz"
+    data_path: "data/datasets/audio2action/audio2action_multi_ep_dataset_ovmm_patched.json.gz"
     transformations_matrix_path: null
     viewpoints_matrix_path: null
-  task:
-    receptacle_categories_file: "/Users/llach/repos/home-robot/data/objects/hssd-receptacles.csv"
   
 habitat_baselines:
   verbose: False
