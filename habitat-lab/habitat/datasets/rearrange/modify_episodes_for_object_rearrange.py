@@ -567,7 +567,7 @@ if __name__ == "__main__":
     enable_add_viewpoints = True
     config = OmegaConf.load("examples/ovmm_train.yaml")
 
-    data_dir = "/Users/llach/repos/home-robot/data/datasets/audio2action/"
+    data_dir = "data/datasets/audio2action/"
     episodes_file = "audio2action_multi_ep_dataset_ovmm.json.gz"
 
     obj_category_mapping = read_obj_category_mapping(
