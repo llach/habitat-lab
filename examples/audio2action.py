@@ -27,6 +27,7 @@ if __name__ == "__main__":
 
     a2a_dataset_path = "data/datasets/audio2action/"
     episodes_file_name = "audio2action_multi_ep_dataset_ovmm.json"
+    os.makedirs(a2a_dataset_path, exist_ok=True)
 
     cfg = get_config_defaults()
     override_config = OmegaConf.load("examples/ovmm_train.yaml")
